@@ -8,6 +8,10 @@
 <body>
   <h1>Edit Show {{ show_id }}</h1>
 
+  {% for error in messages %}
+    <p style="color:red;">{{ error }}</p>
+  {% endfor %}
+
   <form action="/shows/{{ show_id }}/update">
     <div>
       <label>Title</label>

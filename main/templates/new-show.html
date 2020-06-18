@@ -6,6 +6,10 @@
   <title>Document</title>
 </head>
 <body>
+  {% for error in messages %}
+    <p style="color:red;">{{ error }}</p>
+  {% endfor %}
+
   <form action="/shows/add_new">
     <div>
       <label>Title</label>

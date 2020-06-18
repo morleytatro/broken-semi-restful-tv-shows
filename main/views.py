@@ -30,6 +30,13 @@ def show_details_page(request):
     return render("view-show.html")
 
 def create_show():
+    errors = Show.objects.basic_validator(request.POST)
+
+    if len(errors) > 0:
+        for key, val in errors.items():
+            messages.error(request, val)
+            return redirect("/shows/new")
+
     Show.objects.create(
         title=request.POST["title"],
         network=request.POST["network"],
@@ -45,6 +52,13 @@ def delete_show(request):
     return redirect("/dashboard")
 
 def update_show(request):
+    errors = Show.objects.basic_validator(request.POST)
+
+    if len(errors) > 0:
+        for key, val in errors.items():
+            messages.error(request, val)
+            return redirect("/shows/new")
+
     show_to_edit = Show.objects.get(request.POST["show_id"])
 
     show_to_edit.title = request.POST["title"]
